@@ -96,43 +96,58 @@
 
   </script>
   <script>
-    function openTawkInquiry() {
+    function getInquiryValues() {
       const nickname = document.getElementById("nickname").value.trim();
       const email = document.getElementById("email").value.trim();
-      const message = document.getElementById("message").value.trim();
       const checked = document.getElementById("priceCheck").checked;
       const notice = document.getElementById("notice");
 
-      if (!nickname || !email || !message || !checked) {
-        notice.textContent = "이름(별명), 이메일, 문의 내용, 구독요금 확인 체크를 모두 완료해주세요.";
-        return;
+      if (!nickname || !email || !checked) {
+        notice.textContent = "이름(별명), 이메일, 구독요금 확인 체크를 모두 완료해주세요.";
+        return null;
       }
 
-      notice.textContent = "실시간 채팅창을 여는 중입니다...";
+      return { nickname, email, notice };
+    }
+
+    function sendMailInquiry() {
+      const data = getInquiryValues();
+      if (!data) return;
+
+      const subject = encodeURIComponent("Nexio 문의");
+      const body = encodeURIComponent(
+        "Nexio 문의합니다.
+
+" +
+        "이름(별명): " + data.nickname + "
+" +
+        "이메일: " + data.email + "
+" +
+        "월 구독 요금($249.9 / 월) 확인 완료"
+      );
+
+      window.location.href = "mailto:your-email@example.com?subject=" + subject + "&body=" + body;
+    }
+
+    function openTawkInquiry() {
+      const data = getInquiryValues();
+      if (!data) return;
+
+      data.notice.textContent = "실시간 채팅창을 여는 중입니다...";
 
       if (typeof Tawk_API !== "undefined" && Tawk_API.setAttributes) {
         Tawk_API.setAttributes({
-          name: nickname,
-          email: email,
-          inquiry_message: message,
-          plan_confirmed: "$249.9 / 월 확인"
-        }, function(error){});
-      }
-
-      if (typeof Tawk_API !== "undefined" && Tawk_API.addEvent) {
-        Tawk_API.addEvent("nexio_inquiry_started", {
-          nickname: nickname,
-          email: email,
-          message: message,
+          name: data.nickname,
+          email: data.email,
           plan_confirmed: "$249.9 / 월 확인"
         }, function(error){});
       }
 
       if (typeof Tawk_API !== "undefined" && Tawk_API.maximize) {
         Tawk_API.maximize();
-        notice.textContent = "";
+        data.notice.textContent = "";
       } else {
-        notice.textContent = "채팅 시스템을 불러오는 중입니다. 잠시 후 다시 눌러주세요.";
+        data.notice.textContent = "채팅 시스템을 불러오는 중입니다. 잠시 후 다시 눌러주세요.";
       }
     }
   </script>
