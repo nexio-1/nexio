@@ -313,3 +313,43 @@ footer {
   text-decoration: underline;
   transform: translateY(-2px);
 }
+
+
+.privacy-note {
+  display: inline-block;
+  margin-top: 8px;
+  color: #8f9aaa;
+  font-size: 14px;
+}
+
+#contact {
+  scroll-margin-top: 95px;
+}
+
+.contact-card {
+  width: 100%;
+  max-width: 700px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 13px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 1px solid #394454;
+  background: rgba(13, 17, 23, 0.85);
+  color: #fff;
+  font-family: Arial, "Noto Sans KR", sans-serif;
+  font-size: 15px;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #f5c542;
+}
+
+.chat-start-btn {
+  margin-top: 20px;
+}

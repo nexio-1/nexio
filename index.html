@@ -13,7 +13,7 @@
     <nav>
       <a href="#home">메인</a>
       <a href="#program">프로그램 소개</a>
-      <a href="#contact">채팅문의</a>
+      <a href="#contact">💬 문의하기</a>
     </nav>
   </header>
 
@@ -25,7 +25,7 @@
         Join us for these amazing benefits.<br><br><strong>오늘 바로 Nexio 와 함께 놀라운 혜택을 누려보세요.</strong>
       </p>
       <a class="btn primary" href="#program">프로그램 보기</a>
-      <a class="btn secondary" href="#contact">문의하기</a>
+      <a class="btn secondary" href="#contact">💬 문의하기</a>
     </div>
   </section>
 
@@ -59,33 +59,7 @@
       </div>
     </div>
   </section>
-
-  <section id="contact" class="section contact">
-    <h2>채팅문의</h2>
-    <p class="section-desc">
-      아래 내용을 입력한 뒤 실시간 채팅문의 버튼을 눌러주세요.
-    </p>
-
-    <div class="card reveal">
-      <form id="inquiryForm">
-        <label for="nickname">이름(별명)</label>
-        <input id="nickname" type="text" placeholder="닉네임 입력" required />
-
-        <label for="email">이메일</label>
-        <input id="email" type="email" placeholder="example@email.com" required />
-
-        <label class="check">
-          <input id="priceCheck" type="checkbox" required />
-          <span>프로그램의 <strong>월 구독 요금($249.9/월)</strong>을 확인했습니다.</span>
-        </label>
-
-        <button type="button" class="btn primary" onclick="openChat()">실시간 채팅 문의</button>
-        <p id="notice" class="notice"></p>
-      </form>
-    </div>
-  </section>
-
-  <footer>
+<footer>
     <p>© 2026 Nexio. All rights reserved.</p>
     <p class="small">본 사이트는 Nexio 공식 사이트가 아니며, 게임 변조/치트 기능을 제공하지 않습니다.</p>
   </footer>
@@ -120,6 +94,47 @@
     }, { threshold: 0.15 });
     reveals.forEach(item => observer.observe(item));
 
+  </script>
+  <script>
+    function openTawkInquiry() {
+      const nickname = document.getElementById("nickname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const checked = document.getElementById("priceCheck").checked;
+      const notice = document.getElementById("notice");
+
+      if (!nickname || !email || !message || !checked) {
+        notice.textContent = "이름(별명), 이메일, 문의 내용, 구독요금 확인 체크를 모두 완료해주세요.";
+        return;
+      }
+
+      notice.textContent = "실시간 채팅창을 여는 중입니다...";
+
+      if (typeof Tawk_API !== "undefined" && Tawk_API.setAttributes) {
+        Tawk_API.setAttributes({
+          name: nickname,
+          email: email,
+          inquiry_message: message,
+          plan_confirmed: "$249.9 / 월 확인"
+        }, function(error){});
+      }
+
+      if (typeof Tawk_API !== "undefined" && Tawk_API.addEvent) {
+        Tawk_API.addEvent("nexio_inquiry_started", {
+          nickname: nickname,
+          email: email,
+          message: message,
+          plan_confirmed: "$249.9 / 월 확인"
+        }, function(error){});
+      }
+
+      if (typeof Tawk_API !== "undefined" && Tawk_API.maximize) {
+        Tawk_API.maximize();
+        notice.textContent = "";
+      } else {
+        notice.textContent = "채팅 시스템을 불러오는 중입니다. 잠시 후 다시 눌러주세요.";
+      }
+    }
   </script>
 
   <!--Start of Tawk.to Script-->
