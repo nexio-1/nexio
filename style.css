@@ -313,3 +313,186 @@ footer {
   text-decoration: underline;
   transform: translateY(-2px);
 }
+
+
+/* Nexio v14 custom fixed chat box */
+.nexio-chat {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: 460px;
+  max-height: calc(100vh - 56px);
+  z-index: 2147483647;
+  background: #ffffff;
+  color: #172033;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 102, 255, 0.16);
+  box-shadow: 0 30px 100px rgba(0,0,0,0.38), 0 0 44px rgba(0,132,255,0.22);
+  animation: nexioChatRise 0.6s ease both;
+}
+
+@keyframes nexioChatRise {
+  from { opacity: 0; transform: translateY(28px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.nexio-chat.attention {
+  box-shadow: 0 34px 110px rgba(0,0,0,0.42), 0 0 55px rgba(0,132,255,0.35);
+}
+
+.nexio-chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, #0066ff, #00a3ff);
+  color: #ffffff;
+}
+
+.nexio-chat-header strong {
+  display: block;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.nexio-chat-header span {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255,255,255,0.92);
+  font-size: 12px;
+}
+
+.nexio-online {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  background: rgba(255,255,255,0.20);
+}
+
+.nexio-chat-body {
+  padding: 22px;
+  background: #ffffff;
+}
+
+.nexio-chat-message {
+  padding: 15px;
+  border-radius: 16px;
+  background: #f3f8ff;
+  border: 1px solid #dcecff;
+  margin-bottom: 18px;
+}
+
+.nexio-chat-message p {
+  margin: 5px 0;
+  color: #314155;
+  font-size: 14px;
+}
+
+.nexio-chat-message .hello {
+  color: #0066ff;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.nexio-chat-message .hours {
+  margin-top: 10px;
+  color: #172033;
+  font-weight: 900;
+}
+
+.nexio-chat-body label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 7px;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.nexio-chat-body input[type="text"],
+.nexio-chat-body input[type="email"] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d5deea;
+  background: #ffffff;
+  color: #172033;
+  font-size: 15px;
+  outline: none;
+}
+
+.nexio-chat-body input[type="text"]:focus,
+.nexio-chat-body input[type="email"]:focus {
+  border-color: #0066ff;
+  box-shadow: 0 0 0 4px rgba(0,102,255,0.10);
+}
+
+.nexio-check {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px !important;
+  color: #314155 !important;
+  font-weight: 500 !important;
+  line-height: 1.45;
+}
+
+.nexio-check input {
+  margin-top: 4px;
+  width: auto;
+}
+
+.nexio-check strong {
+  color: #0066ff;
+}
+
+.nexio-chat-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px 16px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #0066ff, #00a3ff);
+  box-shadow: 0 12px 28px rgba(0,102,255,0.25);
+  transition: 0.2s ease;
+}
+
+.nexio-chat-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(0,102,255,0.32);
+}
+
+.nexio-notice {
+  min-height: 20px;
+  margin-top: 12px;
+  color: #0066ff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .nexio-chat {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+  }
+
+  .nexio-chat-header {
+    align-items: flex-start;
+  }
+
+  .nexio-online {
+    font-size: 11px;
+  }
+}
