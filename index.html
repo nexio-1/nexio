@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="particles" aria-hidden="true"></div>
+  <header class="nav">
+    <div class="logo">Nexio</div>
+    <nav>
+      <a href="#home">메인</a>
+      <a href="#program">프로그램 소개</a>
+      <a href="#contact">채팅문의</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div>
+      <span class="badge">Nexio 연습지원 · 설정관리</span>
+      <h1>Become Nexio Today</h1>
+      <p class="desc">
+        Join us for these amazing benefits.<br><br><strong>오늘 바로 Nexio 와 함께 놀라운 혜택을 누려보세요.</strong>
+      </p>
+      <a class="btn primary" href="#program">프로그램 보기</a>
+      <a class="btn secondary" href="#contact">문의하기</a>
+    </div>
+  </section>
+
+  <section id="program" class="section">
+    <h2>프로그램 소개</h2>
+    <p class="section-desc">
+      하나의 플랜, 모든 전장을 지배한다.
+      <br>
+      <a class="requirements-link" href="https://heyzine.com/flip-book/db1b31319f.html" target="_blank" rel="noopener noreferrer">
+        📄 View Requirements ↗
+      </a>
+    </p>
+
+    <div class="card reveal">
+      <h3>프로그램 가격</h3>
+      <p class="price">$249.9 / 월</p>
+      <p><strong>월 구독 요금:</strong> 매월 $249.9가 결제됩니다.</p>
+      <br>
+      <p>✔ 하드웨어 메모리 접근</p>
+      <p>✔ 안티바이러스 지원</p>
+      <p>✔ 방화벽 지원</p>
+      <p>✔ 모든 안티치트 지원</p>
+      <p>✔ 모든 플랫폼 지원</p>
+      <p>✔ 24시간 이내 배송</p>
+    </div>
+
+    <div class="features">
+      <div class="feature reveal">
+        <h3>설정 관리</h3>
+        <p>자신에게 맞는 세팅을 기록하고 다시 확인할 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <h2>채팅문의</h2>
+    <p class="section-desc">
+      아래 내용을 입력한 뒤 실시간 채팅문의 버튼을 눌러주세요.
+    </p>
+
+    <div class="card reveal">
+      <form id="inquiryForm">
+        <label for="nickname">이름(별명)</label>
+        <input id="nickname" type="text" placeholder="닉네임 입력" required />
+
+        <label for="email">이메일</label>
+        <input id="email" type="email" placeholder="example@email.com" required />
+
+        <label class="check">
+          <input id="priceCheck" type="checkbox" required />
+          <span>프로그램의 <strong>월 구독 요금($249.9/월)</strong>을 확인했습니다.</span>
+        </label>
+
+        <button type="button" class="btn primary" onclick="openChat()">실시간 채팅 문의</button>
+        <p id="notice" class="notice"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Nexio. All rights reserved.</p>
+    <p class="small">본 사이트는 Nexio 공식 사이트가 아니며, 게임 변조/치트 기능을 제공하지 않습니다.</p>
+  </footer>
+
+  <script>
+    function openChat() {
+      const nickname = document.getElementById("nickname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const checked = document.getElementById("priceCheck").checked;
+      const notice = document.getElementById("notice");
+
+      if (!nickname || !email || !checked) {
+        notice.textContent = "이름(별명), 이메일, 가격 확인 체크를 모두 완료해주세요.";
+        return;
+      }
+
+      const message = encodeURIComponent(
+        "문의합니다.%0A" +
+        "이름(별명): " + nickname + "%0A" +
+        "이메일: " + email + "%0A" +
+        "월 구독 요금($249.9/월) 확인 완료"
+      );
+
+      window.location.href = "mailto:your-email@example.com?subject=Nexio 문의&body=" + message;
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(item => observer.observe(item));
+
+  </script>
+</body>
+</html>
